@@ -2,64 +2,78 @@
 
 Automated abstract screening tool for Systematic Literature Review (SLR) using AI via local API router.
 
-Built for the research topic: **How Southeast Asian Legal Frameworks Respond to Big Tech Self-Regulation in the Context of Content Moderation and Freedom of Expression.**
+Screens thousands of academic article abstracts automatically — deciding include/exclude based on a configurable research topic and criteria — then exports results to Excel or an interactive HTML dashboard.
 
 ## The Problem
 
-Screening thousands of academic abstracts manually is exhausting:
+Screening thousands of abstracts manually is exhausting:
 
-- **Manual (Rayyan):** read 3,886 abstracts one by one → ~32 hours
-- **SLR Autopilot:** automated AI screening → ~20 minutes
+- **Manual:** read abstracts one by one → dozens of hours
+- **SLR Autopilot:** automated AI screening → minutes
 
 ## How it works
 
 ```
-RIS file (exported from Rayyan/Scopus/etc.)
+RIS file (exported from Rayyan/Scopus/Web of Science/etc.)
     ↓
 slr_screening.py  →  sends each abstract to AI model via local API router
     ↓
-screening_log.json  (resumeable progress log)
+output/screening_log.json  (resumeable progress log)
     ↓
-export_excel.py  →  hasil_screening.xlsx (4 sheets + charts)
+export_excel.py   →  output/hasil_screening.xlsx  (4 sheets + charts)
+export_html.py    →  output/dashboard.html         (interactive dashboard)
 ```
 
 ## Requirements
 
 - Python 3.10+
-- Local API router (e.g. [9Router / Kiro](https://kiro.ai)) running on `localhost:20128`
+- Local AI API router (e.g. [Kiro / 9Router](https://kiro.ai)) running on `localhost:20128`
 
 ```bash
 pip install -r requirements.txt
 ```
 
+## Configuration
+
+Before running, edit the `SYSTEM_PROMPT` in `slr_screening.py` to match your research topic and inclusion/exclusion criteria. The current sample is set up for a Southeast Asia content moderation SLR.
+
 ## Usage
 
-**1. Run screening**
+**1. Validate your RIS file (dry run)**
+```bash
+python slr_screening.py --dry-run -i yourfile.ris
+```
+Checks article count, detects duplicates — without calling the API.
+
+**2. Run screening**
 ```bash
 # Default (sample.ris)
 python slr_screening.py
 
 # Custom input file
-python slr_screening.py -i data/myfile.ris
+python slr_screening.py -i yourfile.ris
 
 # Use a more accurate model
-python slr_screening.py -i data/myfile.ris -m kr/claude-sonnet-4.5
+python slr_screening.py -i yourfile.ris -m kr/claude-sonnet-4.5
 
-# Review low-confidence decisions interactively
-python slr_screening.py --review
-
-# Full options
-python slr_screening.py --help
+# Review low-confidence decisions interactively after screening
+python slr_screening.py -i yourfile.ris --review
 ```
 
-**2. Export to Excel**
+**3. Export to Excel**
 ```bash
-python export_excel.py
+python export_excel.py -i yourfile.ris -l output/screening_log.json
 ```
 
-Generates `hasil_screening.xlsx` with sheets: All, Include, Exclude, Summary, Visualisasi.
+**4. Export to HTML dashboard**
+```bash
+python export_html.py -i yourfile.ris -l output/screening_log.json
+```
+Opens as a single self-contained HTML file — no internet connection needed.
 
 ## CLI Options
+
+**slr_screening.py**
 
 | Flag | Default | Description |
 |---|---|---|
@@ -68,7 +82,16 @@ Generates `hasil_screening.xlsx` with sheets: All, Include, Exclude, Summary, Vi
 | `-c`, `--concurrency` | `5` | Parallel requests |
 | `-d`, `--delay` | `2` | Delay between batches (seconds) |
 | `-o`, `--output-dir` | `output/` | Output folder |
-| `--review` | — | Interactive review for low-confidence results |
+| `--dry-run` | — | Validate file without calling the API |
+| `--review` | — | Interactively review low-confidence results |
+
+**export_excel.py / export_html.py**
+
+| Flag | Default | Description |
+|---|---|---|
+| `-i`, `--input` | `sample.ris` | Input RIS file |
+| `-l`, `--log` | `output/screening_log.json` | Screening log file |
+| `-o`, `--output` | `output/hasil_screening.xlsx` / `output/dashboard.html` | Output file |
 
 ## Output
 
@@ -78,12 +101,19 @@ Generates `hasil_screening.xlsx` with sheets: All, Include, Exclude, Summary, Vi
 | `output/included.ris` | Articles that passed screening |
 | `output/excluded.ris` | Articles that were excluded |
 | `output/hasil_screening.ris` | All articles with decision tag |
-| `output/hasil_screening.xlsx` | Excel report with 4 sheets + 4 charts |
+| `output/hasil_screening.xlsx` | Excel report: 4 sheets + 4 charts |
+| `output/dashboard.html` | Interactive HTML dashboard with search & filter |
+
+See the [`examples/`](examples/) folder for sample output from running on `sample.ris`.
 
 ## Features
 
+- **Configurable** — swap in any research topic and criteria via `SYSTEM_PROMPT`
 - **Resume-able** — continues from where it left off if interrupted
 - **Async parallel** — processes multiple articles simultaneously
+- **Duplicate detection** — flags duplicate titles/DOIs before screening
+- **Dry-run mode** — validate your RIS file before committing API calls
 - **Rate limit handling** — auto retry with exponential backoff
-- **Interactive review mode** — manually override low-confidence AI decisions
-- **Excel export** — metadata + decisions + confidence + reason + visualizations
+- **Interactive review** — manually override low-confidence AI decisions
+- **Excel export** — full metadata + decisions + confidence + reason + 4 charts
+- **HTML dashboard** — searchable, tabbed, self-contained — shareable without Excel
