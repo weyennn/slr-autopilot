@@ -1,0 +1,77 @@
+{
+  "0": {
+    "decision": "include",
+    "confidence": "high",
+    "reason": "Directly addresses content moderation by platforms, freedom of expression, SE Asian digital law (Indonesia), and Big Tech self-regulation\u2014all core inclusion criteria."
+  },
+  "1": {
+    "decision": "include",
+    "confidence": "high",
+    "reason": "Directly addresses hate speech regulation on social media platforms (Facebook, Twitter) in a Southeast Asian country (Malaysia), platform self-regulation practices, and the tension between legal frameworks and freedom of expression."
+  },
+  "2": {
+    "decision": "include",
+    "confidence": "high",
+    "reason": "Directly addresses platform accountability and disinformation regulation in Southeast Asia (Philippines), examining legal frameworks and Big Tech regulation with clear digital governance focus."
+  },
+  "3": {
+    "decision": "include",
+    "confidence": "high",
+    "reason": "Directly addresses SE Asian digital law (Vietnam Cybersecurity Law), Big Tech self-regulation, platform governance, and freedom of expression implications."
+  },
+  "4": {
+    "decision": "exclude",
+    "confidence": "high",
+    "reason": "Article focuses on ride-hailing platform regulation (transportation services) with no discussion of content moderation, freedom of expression, or digital rights governance."
+  },
+  "5": {
+    "decision": "include",
+    "confidence": "high",
+    "reason": "Directly addresses content moderation by TikTok in Southeast Asia (Thailand), platform self-regulation versus legal frameworks, and freedom of expression concerns."
+  },
+  "6": {
+    "decision": "exclude",
+    "confidence": "high",
+    "reason": "Article focuses on blockchain and fintech regulation in Indonesia with no discussion of content moderation, platform governance, freedom of expression, or digital rights."
+  },
+  "7": {
+    "decision": "include",
+    "confidence": "high",
+    "reason": "Directly addresses platform content moderation obligations, legal regulation of social media, and freedom of expression balance in a Southeast Asian jurisdiction (Singapore), matching multiple inclusion criteria."
+  },
+  "8": {
+    "decision": "include",
+    "confidence": "high",
+    "reason": "Article examines government-platform cooperation in content moderation across Southeast Asian countries with direct implications for freedom of expression, meeting criteria 2, 3, 4, and 5 despite COVID-19 framing."
+  },
+  "9": {
+    "decision": "include",
+    "confidence": "high",
+    "reason": "Article directly addresses platform content moderation (Facebook), hate speech regulation, conflicts between platform self-regulation and local law, and Big Tech governance in a Southeast Asian country (Myanmar)."
+  },
+  "10": {
+    "decision": "exclude",
+    "confidence": "high",
+    "reason": "Article focuses on e-commerce consumer protection and counterfeit goods liability, not content moderation, freedom of expression, or platform governance of user-generated content."
+  },
+  "11": {
+    "decision": "include",
+    "confidence": "high",
+    "reason": "Article directly addresses platform governance and self-regulation (Content ID system) in Southeast Asian legal context (Philippines, Indonesia, Thailand, Malaysia) with examination of how algorithmic content moderation interacts with national legal frameworks."
+  },
+  "12": {
+    "decision": "include",
+    "confidence": "high",
+    "reason": "Directly addresses platform self-regulation (Twitter/X compliance patterns), Southeast Asian legal frameworks (ASEAN member states), and freedom of expression in digital context with explicit focus on content removal and regional governance."
+  },
+  "13": {
+    "decision": "exclude",
+    "confidence": "high",
+    "reason": "This is a purely technical cybersecurity assessment focused on infrastructure protection and vulnerability analysis, with no legal/governance angle on content moderation, platform regulation, freedom of expression, or digital rights."
+  },
+  "14": {
+    "decision": "include",
+    "confidence": "high",
+    "reason": "Directly addresses Southeast Asian legal frameworks (Cambodia and Laos), platform compliance/self-regulation by Big Tech, government regulation, and freedom of expression implications in digital context."
+  }
+}
