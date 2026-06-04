@@ -1,0 +1,13 @@
+# Data asli & output (jangan di-upload)
+data/
+output/
+
+# Temp files
+~$*.xlsx
+*.tmp
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
