@@ -22,6 +22,8 @@ output/screening_log.json  (resumeable progress log)
     ↓
 export_excel.py   →  output/hasil_screening.xlsx  (4 sheets + charts)
 export_html.py    →  output/dashboard.html         (interactive dashboard)
+export_prisma.py  →  output/prisma_flow.png + output/prisma_report.docx
+                     (PRISMA 2020 flow diagram + 27-item checklist)
 ```
 
 ## Requirements
@@ -71,6 +73,17 @@ python export_html.py -i yourfile.ris -l output/screening_log.json
 ```
 Opens as a single self-contained HTML file — no internet connection needed.
 
+**5. Export PRISMA 2020 flow diagram + report**
+```bash
+python export_prisma.py -i yourfile.ris -l output/screening_log.json
+
+# With manual full-text screening counts (after you finish that stage)
+python export_prisma.py \
+  --fulltext-assessed 83 --fulltext-excluded 12 \
+  --fulltext-reasons "Wrong topic:7; No full text:3; Wrong language:2"
+```
+Generates `prisma_flow.png` (publication-ready) + `prisma_report.docx` (editable in Word: diagram + 27-item PRISMA 2020 checklist + abstract checklist). Source: https://www.prisma-statement.org/prisma-2020
+
 ## CLI Options
 
 **slr_screening.py**
@@ -103,6 +116,8 @@ Opens as a single self-contained HTML file — no internet connection needed.
 | `output/hasil_screening.ris` | All articles with decision tag |
 | `output/hasil_screening.xlsx` | Excel report: 4 sheets + 4 charts |
 | `output/dashboard.html` | Interactive HTML dashboard with search & filter |
+| `output/prisma_flow.png` | PRISMA 2020 flow diagram (publication-ready) |
+| `output/prisma_report.docx` | PRISMA report: diagram + 27-item + abstract checklist |
 
 See the [`examples/`](examples/) folder for sample output from running on `sample.ris`.
 
@@ -117,3 +132,4 @@ See the [`examples/`](examples/) folder for sample output from running on `sampl
 - **Interactive review** — manually override low-confidence AI decisions
 - **Excel export** — full metadata + decisions + confidence + reason + 4 charts
 - **HTML dashboard** — searchable, tabbed, self-contained — shareable without Excel
+- **PRISMA 2020** — auto-generated flow diagram (PNG) + editable DOCX with 27-item checklist
