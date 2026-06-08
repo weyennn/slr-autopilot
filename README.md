@@ -2,7 +2,7 @@
 
 Automated abstract screening tool for Systematic Literature Review (SLR) using AI via local API router.
 
-Screens thousands of academic article abstracts automatically — deciding include/exclude based on a configurable research topic and criteria — then exports results to Excel or an interactive HTML dashboard.
+Screens thousands of academic article abstracts automatically, deciding include/exclude based on a configurable research topic and criteria, then exports results to Excel or an interactive HTML dashboard.
 
 ## The Problem
 
@@ -45,7 +45,7 @@ Before running, edit the `SYSTEM_PROMPT` in `slr_screening.py` to match your res
 ```bash
 python slr_screening.py --dry-run -i yourfile.ris
 ```
-Checks article count, detects duplicates — without calling the API.
+Checks article count, detects duplicates, without calling the API.
 
 **2. Run screening**
 ```bash
@@ -71,7 +71,7 @@ python export_excel.py -i yourfile.ris -l output/screening_log.json
 ```bash
 python export_html.py -i yourfile.ris -l output/screening_log.json
 ```
-Opens as a single self-contained HTML file — no internet connection needed.
+Opens as a single self-contained HTML file (no internet connection needed).
 
 **5. Export PRISMA 2020 flow diagram + report**
 ```bash
@@ -95,8 +95,8 @@ Generates `prisma_flow.png` (publication-ready) + `prisma_report.docx` (editable
 | `-c`, `--concurrency` | `5` | Parallel requests |
 | `-d`, `--delay` | `2` | Delay between batches (seconds) |
 | `-o`, `--output-dir` | `output/` | Output folder |
-| `--dry-run` | — | Validate file without calling the API |
-| `--review` | — | Interactively review low-confidence results |
+| `--dry-run` | - | Validate file without calling the API |
+| `--review` | - | Interactively review low-confidence results |
 
 **export_excel.py / export_html.py**
 
@@ -123,13 +123,13 @@ See the [`examples/`](examples/) folder for sample output from running on `sampl
 
 ## Features
 
-- **Configurable** — swap in any research topic and criteria via `SYSTEM_PROMPT`
-- **Resume-able** — continues from where it left off if interrupted
-- **Async parallel** — processes multiple articles simultaneously
-- **Duplicate detection** — flags duplicate titles/DOIs before screening
-- **Dry-run mode** — validate your RIS file before committing API calls
-- **Rate limit handling** — auto retry with exponential backoff
-- **Interactive review** — manually override low-confidence AI decisions
-- **Excel export** — full metadata + decisions + confidence + reason + 4 charts
-- **HTML dashboard** — searchable, tabbed, self-contained — shareable without Excel
-- **PRISMA 2020** — auto-generated flow diagram (PNG) + editable DOCX with 27-item checklist
+- **Configurable**: swap in any research topic and criteria via `SYSTEM_PROMPT`
+- **Resume-able**: continues from where it left off if interrupted
+- **Async parallel**: processes multiple articles simultaneously
+- **Duplicate detection**: flags duplicate titles/DOIs before screening
+- **Dry-run mode**: validate your RIS file before committing API calls
+- **Rate limit handling**: auto retry with exponential backoff
+- **Interactive review**: manually override low-confidence AI decisions
+- **Excel export**: full metadata + decisions + confidence + reason + 4 charts
+- **HTML dashboard**: searchable, tabbed, self-contained, shareable without Excel
+- **PRISMA 2020**: auto-generated flow diagram (PNG) + editable DOCX with 27-item checklist
